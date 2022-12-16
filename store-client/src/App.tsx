@@ -2,7 +2,6 @@ import Repo from './repositories'
 import Category from './models/Category';
 import { useEffect, useState } from 'react'
 
-
 function App() {
   const [categoryList, setCategoryList] = useState<Category[]>([])
 
