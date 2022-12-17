@@ -24,6 +24,21 @@ function App() {
     }
   }
 
+  const onCreateBook = async (book: Partial<Book>) => {
+    await Repo.book.create(book)
+    fetchbookList()
+  }
+
+  const onUpdateBook = async (book: Partial<Book>) => {
+    await Repo.book.update(book)
+    fetchbookList()
+  }
+
+  const onDeleteBook = async (id: number) => {
+    await Repo.book.delete(id)
+    fetchbookList()
+  }
+
   useEffect(() => {
     fetchCategoryList()
     fetchbookList()
@@ -32,18 +47,23 @@ function App() {
   return (
     <div>
       <div>
+        <BookForm book={{}} categoryList={categoryList} callbackFn={onCreateBook} />
+        <hr />
+      </div>
+      <div>
         <select onChange={e => setFilter(e.target.value)}>
           <option value="">All</option>
           {categoryList.map(category => <option key={category.id} value={category.id}>{category.title}</option>)}
         </select>
-      </div>
-      <hr />
-      {bookList.map(book => 
-      <div key={book.id}>
-        <BookDetail {...book}/>
-        <BookForm book={book} categoryList={categoryList}/>
         <hr />
-        </div> 
+      </div>
+      {bookList.map(book =>
+        <div key={book.id}>
+          <BookDetail {...book} />
+          <BookForm book={book} categoryList={categoryList} callbackFn={onUpdateBook} />
+          <button onClick={e => onDeleteBook(book.id)}>Delete</button>
+          <hr />
+        </div>
       )}
     </div>
   )
