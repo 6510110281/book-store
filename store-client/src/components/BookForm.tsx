@@ -31,7 +31,7 @@ function BookForm(props: Props) {
     <div>
       <form onSubmit={onSubmit}>
         <div>
-          Title : <input type="text" defaultValue={props.book.title} ref={titleRef} required/>
+          Title : <input type="text" pattern="^((?:\s*[A-Za-z0-9]\s*){5,})$" title="Title should have at least 5 characters." defaultValue={props.book.title} ref={titleRef} required/>
         </div>
         <div>
           Price : <input type="number" step="0.01" min="0" defaultValue={props.book.price} ref={priceRef} />
