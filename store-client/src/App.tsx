@@ -3,6 +3,7 @@ import Category from './models/Category';
 import { useEffect, useState } from 'react'
 import Book from './models/Book';
 import BookDetail from './components/BookDetail';
+import BookForm from './components/BookForm';
 
 function App() {
   const [categoryList, setCategoryList] = useState<Category[]>([])
@@ -31,15 +32,19 @@ function App() {
   return (
     <div>
       <div>
-      <select onChange={e => setFilter(e.target.value)}>
+        <select onChange={e => setFilter(e.target.value)}>
           <option value="">All</option>
           {categoryList.map(category => <option key={category.id} value={category.id}>{category.title}</option>)}
         </select>
       </div>
       <hr />
-      <div>
-        {bookList.map(book => <div key={book.id}><BookDetail {...book}/> <hr /> </div> )}
-      </div>
+      {bookList.map(book => 
+      <div key={book.id}>
+        <BookDetail {...book}/>
+        <BookForm book={book} categoryList={categoryList}/>
+        <hr />
+        </div> 
+      )}
     </div>
   )
 }
