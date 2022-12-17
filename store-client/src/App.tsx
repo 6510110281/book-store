@@ -1,9 +1,10 @@
 import Repo from './repositories'
-import Category from './models/Category';
+import Category from './models/Category'
 import { useEffect, useState } from 'react'
-import Book from './models/Book';
-import BookDetail from './components/BookDetail';
-import BookForm from './components/BookForm';
+import Book from './models/Book'
+import BookDetail from './components/BookDetail'
+import BookForm from './components/BookForm'
+import './App.css'
 
 function App() {
   const [categoryList, setCategoryList] = useState<Category[]>([])
@@ -45,6 +46,8 @@ function App() {
   },[filter])
 
   return (
+    <html className='BG'>
+      <p className="Head"><b>&nbsp;&nbsp;&nbsp;Add New Book</b></p>
     <div>
       <div>
         <BookForm book={{}} categoryList={categoryList} callbackFn={onCreateBook} />
@@ -59,7 +62,7 @@ function App() {
       </div>
       {bookList.map(book =>
         <div key={book.id}>
-          <p>
+          <p className="Show-Book">
           <BookDetail {...book} />
           </p>
           <BookForm book={book} categoryList={categoryList} callbackFn={onUpdateBook} />
@@ -68,6 +71,7 @@ function App() {
         </div>
       )}
     </div>
+    </html>
   )
 }
 
