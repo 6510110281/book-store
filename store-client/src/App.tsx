@@ -59,7 +59,9 @@ function App() {
       </div>
       {bookList.map(book =>
         <div key={book.id}>
+          <p>
           <BookDetail {...book} />
+          </p>
           <BookForm book={book} categoryList={categoryList} callbackFn={onUpdateBook} />
           <button onClick={e => onDeleteBook(book.id)}>Delete</button>
           <hr />
